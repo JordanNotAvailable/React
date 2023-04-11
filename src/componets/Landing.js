@@ -1,21 +1,16 @@
+import { Link } from 'react-router-dom';
 
+const Header = () => {
+  return (
+    <header style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'center', height: '80px'}}>
+      <Link style={{marginRight: 'auto'}} to='/signin'>
+        <button style={{marginRight: '1rem'}}>Sign In</button>
+      </Link>
+      <Link to='/register'>
+        <button>Create Account</button>
+      </Link>
+    </header>
+  );
+}
 
-const Landing = () => {
-    return (
-        <p>
-            Already have an account?<br />
-            <span className="line">
-                {/*put router link here*/}
-                <a href="./Signin">Sign In</a>
-            </span>
-        </p>,
-
-        <p> Dont have an account?<br />
-            <span className="line">
-                {/*put router link here*/}
-                <a href="./Register">Creat account</a>
-            </span>
-        </p>
-)}
-
-export default Landing
+export default Header;

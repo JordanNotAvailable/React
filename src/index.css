@@ -49,6 +49,7 @@ a, a:visited {
     color: #fff;
 }
 
+input[type="email"],
 input[type="text"],
 input[type="password"],
 button,
@@ -112,3 +113,28 @@ button {
 .line {
     display: inline-block;
 }
+
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: dodgerblue;
+  }
+  
+  .landing-page p {
+    font-size: 24px;
+    margin: 0 0 1rem 0;
+  }
+  
+  .landing-page .line {
+    border-bottom: 2px solid #333;
+    padding: 0 0.5rem;
+  }
+  
+  .landing-page a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+  }
