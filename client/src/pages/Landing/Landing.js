@@ -1,22 +1,31 @@
-import { Link } from 'react-router-dom';
-import './Landing.css';
-// import Loader from 'react-loaders';
+import React from "react";
+import Header from "../../componets/Header/Header.js";
+import InfoContainer from "../../componets/Info/InfoContainer";
+import "./Landing.css";
 
-const Header = () => {
+const Landing = () => {
   return (
-    <header style={{position: 'absolute', top: '0', right: '0', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', height: '30px', padding: '0 1rem'}}>
-      <Link to='/signin'>
-        <button style={{fontSize: '15px', padding: '0.3rem', marginRight: '1rem'}}>Sign In</button>
-      </Link>
-      <Link to='/register'>
-        <button style={{fontSize: '15px', padding: '0.3rem'}}>Create Account</button>
-      </Link>
-    </header>
+    <div className="home">
+      <Header />
+      <div className="animation-background">
+        <div className="blob purple"></div>
+        <div className="blob yellow"></div>
+        <div className="blob pink"></div>
+        <div className="m-8 relative space-y-4"></div>
+      </div>
+      <div className="content">
+        <div className="animation-container rounded-lg m-3">
+          <div className="games-container">
+            <InfoContainer />
+          </div>
+          <div className="animations-container">
+          </div>
+        </div>
+      </div>
+    </div>
   );
-}
+};
 
+export default Landing;
 
-
-
-export default Header;
 
