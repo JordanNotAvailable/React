@@ -1,0 +1,23 @@
+.solo-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 8.33%;
+    background-color: #eee;
+    padding: 1rem;
+}
+
+.multiplayer-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 1/12;
+    background-color: gray;
+}
+  
+.multiplayer-panel a {
+    text-decoration: none;
+    color: black;
+}
