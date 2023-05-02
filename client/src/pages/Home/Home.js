@@ -1,4 +1,5 @@
 import React from "react";
+import Header from "../../componets/Header/Header"
 import ChatStyle from "../../componets/ChatStyle/ChatStyle";
 import ChatNav from "../../componets/ChatNav/ChatNav";
 import Gamebar from "../../componets/Gamebar/Gamebar";
@@ -9,6 +10,7 @@ const Home = () => {
     <div>
       <ChatStyle />
       <div>
+        <Header />
         <Gamebar />
         <ChatNav />
       </div>
