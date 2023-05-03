@@ -1,7 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from '../../routes/axios';
+import { useMutation } from "@apollo/client";
+import { LOG_IN } from "../../utils/mutations";
 import './Signin.css';
 // import Loader from 'react-loaders';
 
@@ -10,6 +11,9 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/register';
 
 const SignIn = () => {
+
+    const [ signIn, {error} ] = useMutation(LOG_IN)
+
     const userRef = useRef();
     const errRef = useRef();
 
@@ -45,16 +49,11 @@ const SignIn = () => {
             return;
         }
         try {
-            const response = await axios.post(REGISTER_URL,
-                JSON.stringify({ user, pwd }),
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                }
-            );
-            console.log(response?.data);
-            console.log(response?.accessToken);
-            console.log(JSON.stringify(response))
+            const { data } = await signIn({variables:{
+                username: user,
+                password: pwd
+            }})
+            localStorage.setItem('id_token', data.signIn.token)
             setSuccess(true);
             setUser('');
             setPwd('');
@@ -76,7 +75,7 @@ const SignIn = () => {
                 <section>
                     <h1>Success!</h1>
                     <p>
-                        <a href="#">Sign In</a>
+                        <a href="/home">Home</a>
                     </p>
                 </section>
             ) : (

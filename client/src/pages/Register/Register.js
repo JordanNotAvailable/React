@@ -3,6 +3,8 @@ import { useRef, useState, useEffect } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from '../../routes/axios';
+import { useMutation } from "@apollo/client";
+import { ADD_USER } from "../../utils/mutations";
 import './Register.css';
 // import Loader from 'react-loaders';
 
@@ -12,6 +14,9 @@ const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z
 const REGISTER_URL = '/register';
 
 const Register = () => {
+
+    const [ addUser, {error} ] = useMutation(ADD_USER)
+
     const userRef = useRef();
     const errRef = useRef();
 
@@ -65,16 +70,12 @@ const Register = () => {
             return;
         }
         try {
-            const response = await axios.post(REGISTER_URL,
-                JSON.stringify({ user, pwd, email }),
-                {
-                    headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
-                }
-            );
-            console.log(response?.data);
-            console.log(response?.accessToken);
-            console.log(JSON.stringify(response))
+            const { data } = await addUser({variables:{
+                username: user,
+                email: email,
+                password: pwd
+            }})
+            localStorage.setItem('id_token', data.addUser.token)
             setSuccess(true);
             setUser('');
             setPwd('');
@@ -98,7 +99,7 @@ const Register = () => {
                 <section>
                     <h1>Success!</h1>
                     <p>
-                        <a href="#">Sign In</a>
+                        <a href="/home">Home</a>
                     </p>
                 </section>
             ) : (
