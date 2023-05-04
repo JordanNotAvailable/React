@@ -1,16 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useQuery } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from '../../routes/axios';
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../../utils/mutations";
+// import { CHECK_USERNAME_QUERY } from "../../utils/queries";
 import './Register.css';
 // import Loader from 'react-loaders';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const REGISTER_URL = '/register';
 
 const Register = () => {
@@ -21,8 +21,11 @@ const Register = () => {
     const errRef = useRef();
 
     const [user, setUser] = useState('');
+
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
+
+    // const [isUsernameTaken, setIsUsernameTaken] = useState(false);
 
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
@@ -59,6 +62,17 @@ const Register = () => {
     useEffect(() => {
         setErrMsg('');
     }, [user, pwd, matchPwd, email])
+
+    // useEffect(() => {
+    //     if (!loading && !error) {
+    //       setIsUsernameTaken(!!data.user);
+    //     }
+    //   }, [loading, error, data]);
+
+    // const { loading, error, data } = useQuery(CHECK_USERNAME_QUERY, {
+    //     variables: { username },
+    //     skip: !username, // skip query if username is empty
+    //   });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -147,13 +161,13 @@ const Register = () => {
                             onFocus={() => setUserFocus(true)}
                             onBlur={() => setUserFocus(false)}
                         />
+                        {/* {username && !isUsernameAvailable && <p>Username is already taken.</p>} */}
                         <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
                             <FontAwesomeIcon icon={faInfoCircle} />
                             4 to 24 characters.<br />
                             Must begin with a letter.<br />
                             Letters, numbers, underscores, hyphens allowed.
                         </p>
-
                         <label htmlFor="password">
                             Password:
                             <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} />
