@@ -8,17 +8,19 @@ const userSchema = new Schema({
     minlength: 3,
     unique: true,
     trim: true,
+    match: [/^[A-z][A-z0-9-_]{3,23}$/, 'Must match a vailid username!'],
   },
   email: {
     type: String,
     required: true,
     unique: true,
-    match: [/^\S+@\S+$/i, 'Must match an email address!'],
+    match: [/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, 'Must match an email address!'],
   },
   password: {
     type: String,
     required: true,
     minlength: 8,
+    match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/, 'Must match a vailid password!'],
   },
   chats: [
     {
@@ -26,6 +28,16 @@ const userSchema = new Schema({
       ref: 'Chat',
     },
   ],
+  friends: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ]
+});
+
+userSchema.virtual('friendCount').get(function () {
+  return this.friends.length;
 });
 
 userSchema.pre('save', async function (next) {

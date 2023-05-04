@@ -6,36 +6,44 @@ const typeDefs = gql`
     username: String
     email: String
     password: String
-    chats: [Chat]!
+    chats: [Chat]
+    friends: [User]
   }
 
   type Chat {
     _id: ID
-    chatText: String
-    chatAuthor: String
+    users: [User]
+    messages: [Message]
+  }
+
+  type Message {
+    _id: ID
+    userID: String
+    text: String
     createdAt: String
   }
 
   type Auth {
-    token: ID!
+    token: ID
     user: User
   }
 
   type Query {
     users: [User]
     user(username: String!): User
-    chats(username: String): [Chat]
+    chats(username: String!): [Chat]
     chat(chatId: ID!): Chat
     me: User
+    getMessages( _id:ID!,): [Chat]
+    getUserByUsername(username: String!): User
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
-    login(username: String!, password: String!): Auth
-    addChat(chatText: String!): Chat
+    login(email: String!, password: String!): Auth
+    addChat(users: [ID!]): Chat
+    addMessage(_id:ID!, text: String!): Chat
     removeChat(ChatId: ID!): Chat
-    getMessages(from: String!, to: String!): [Chat]
-    addMessage(to: String!, message: String!): Chat
     removeMessage(messageId: ID!): Chat
   }
 `;

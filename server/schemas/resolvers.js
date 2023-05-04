@@ -5,50 +5,51 @@ const bcrypt = require("bcrypt");
 
 const resolvers = {
   Query: {
+
     users: async () => {
       return User.find().populate("chats");
     },
+
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate("chats");
     },
+
     chats: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Chat.find(params).sort({ createdAt: -1 });
     },
+
     chat: async (parent, { chatId }) => {
       return Chat.findOne({ _id: chatId });
     },
+
     me: async (parent, x, context) => {
       if (context.user) {
         return User.findOne({ _id: context.user._id }).populate("chats");
       }
       throw new AuthenticationError("You need to be logged in!");
     },
+
+    getUserByUsername: async ({ username }) => {
+      try {
+        const user = await User.findOne({ username });
+        return {user};
+      } catch (ex) {
+        next(ex);
+      }
+    },
+    
   },
 
   Mutation: {
+    // Creates user
     addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
       return { token, user };
     },
 
-    // Function below is for getting all users, not sure if needed, will need to refractor
-    // module.exports.getAllUsers = async (req, res, next) => {
-    //   try {
-    //     const users = await User.find({ _id: { $ne: req.params.id } }).select([
-    //       "email",
-    //       "username",
-    //       "avatarImage",
-    //       "_id",
-    //     ]);
-    //     return res.json(users);
-    //   } catch (ex) {
-    //     next(ex);
-    //   }
-    // };
-
-    // logs in users 
+    // Logs in users 
     login: async (parent, { username, password }) => {
       const user = await User.findOne({ username });
 
@@ -67,7 +68,7 @@ const resolvers = {
       return { token, user };
     },
 
-    //Adds chats between users
+    // Adds chats between users
     addChat: async (parent, { chatText }, context) => {
       if (context.user) {
         const chat = await Chat.create({
@@ -85,8 +86,7 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    //Removes chats between users
-
+    // Removes chats between users
     removeChat: async (parent, { chatId }, context) => {
       if (context.user) {
         const chat = await Chat.findOneAndDelete({
@@ -109,7 +109,7 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
 
-    //Message functions to get/add/delete messages
+    // Message functions to get/add/delete messages
     getMessages: async (parent, { from, to }, context) => {
       if (context.user) {
         try {
@@ -134,7 +134,7 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
     
-    // adds chats between said User's
+    // Adds chats between said User's
     addMessage: async (parent, { to, message }, context) => {
       if (context.user) {
         try {
@@ -172,7 +172,7 @@ const resolvers = {
     },
     
 
-    //removes messages from the Chat between Users
+    //Removes messages from the Chat between Users
 
     removeMessage: async (parent, { messageId }, context) => {
       if (context.user) {
