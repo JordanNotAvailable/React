@@ -1,10 +1,11 @@
 import React from "react";
 import InfoCard from "./InfoCard";
+import './InfoContainer.css';
 const InfoContainer = () => {
   return (
-    <div>
+    <div className="InfoContainer">
       {" "}
-      <h1> GamesContainer </h1>
+      <h1> Welcome to the site! </h1>
       <InfoCard />
     </div>
   );
