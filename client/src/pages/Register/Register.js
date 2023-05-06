@@ -1,4 +1,4 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable no-unused-vars */
 import { useRef, useState, useEffect, useQuery } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,7 +11,6 @@ import './Register.css';
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-const REGISTER_URL = '/register';
 
 const Register = () => {
 
@@ -63,16 +62,16 @@ const Register = () => {
         setErrMsg('');
     }, [user, pwd, matchPwd, email])
 
-    // useEffect(() => {
-    //     if (!loading && !error) {
-    //       setIsUsernameTaken(!!data.user);
-    //     }
-    //   }, [loading, error, data]);
-
-    // const { loading, error, data } = useQuery(CHECK_USERNAME_QUERY, {
+    // const { loading, wrong, data } = useQuery(CHECK_USERNAME_QUERY, {
     //     variables: { username },
     //     skip: !username, // skip query if username is empty
     //   });
+
+    // useEffect(() => {
+    //     if (!loading && !wrong) {
+    //       setIsUsernameTaken(!!data.user);
+    //     }
+    //   }, [loading, wrong, data]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
