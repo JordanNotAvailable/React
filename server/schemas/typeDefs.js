@@ -34,17 +34,20 @@ const typeDefs = gql`
     chats(username: String!): [Chat]
     chat(chatId: ID!): Chat
     me: User
-    getMessages( _id:ID!,): [Chat]
+    getMessages( _id:ID!, text: String! ): [Chat]
     getUserByUsername(username: String!): User
+    getAllFriends(username: String!): User
   }
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
-    login(email: String!, password: String!): Auth
+    login(username: String!, password: String!): Auth
     addChat(users: [ID!]): Chat
-    addMessage(_id:ID!, text: String!): Chat
-    removeChat(ChatId: ID!): Chat
-    removeMessage(messageId: ID!): Chat
+    addMessage(_id: ID!, text: String!): Chat
+    removeChat(_id: ID!): Chat
+    removeMessage(_id: ID!): Chat
+    addFriend(username: String!): User
+    removeFriend(username: String!): User
   }
 `;
 
