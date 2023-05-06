@@ -1,12 +1,10 @@
 import React from "react";
-import Header from "../../componets/Header/Header.js";
 import InfoContainer from "../../componets/Info/InfoContainer";
 import "./Landing.css";
 
 const Landing = () => {
   return (
     <div className="home">
-      <Header />
       <div className="animation-background">
         <div className="blob purple"></div>
         <div className="blob yellow"></div>

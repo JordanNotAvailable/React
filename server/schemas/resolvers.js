@@ -185,45 +185,41 @@ const resolvers = {
       throw new AuthenticationError("You need to be logged in!");
     },
   },
+  // addFriend: async (parent, { username }, context) => {
+  //   if (context.user) {
+  //     const friend = await User.findOne({ username });
 
-  addFriend: async (parent, { username }, context) => {
-    if (context.user) {
-      const friend = await User.findOne({ username });
-  
-      if (!friend) {
-        throw new UserInputError("User not found!");
-      }
-  
-      await User.findOneAndUpdate(
-        { _id: context.user._id },
-        { $addToSet: { friends: friend._id } }
-      );
-  
-      return friend;
-    }
-    throw new AuthenticationError("You need to be logged in!");
-  },
+  //     if (!friend) {
+  //       throw new UserInputError("User not found!");
+  //     }
 
-  removeFriend: async (parent, { username }, context) => {
-    if (context.user) {
-      const friend = await User.findOne({ username });
+  //     await User.findOneAndUpdate(
+  //       { _id: context.user._id },
+  //       { $addToSet: { friends: friend._id } }
+  //     );
+
+  //     return friend;
+  //   }
+  //   throw new AuthenticationError("You need to be logged in!");
+  // },
+
+  // removeFriend: async (parent, { username }, context) => {
+  //   if (context.user) {
+  //     const friend = await User.findOne({ username });
   
-      if (!friend) {
-        throw new UserInputError("User not found!");
-      }
+  //     if (!friend) {
+  //       throw new UserInputError("User not found!");
+  //     }
   
-      await User.findOneAndUpdate(
-        { _id: context.user._id },
-        { $pull: { friends: friend._id } }
-      );
+  //     await User.findOneAndUpdate(
+  //       { _id: context.user._id },
+  //       { $pull: { friends: friend._id } }
+  //     );
   
-      return friend;
-    }
-    throw new AuthenticationError("You need to be logged in!");
-  },
-  
+  //     return friend;
+  //   }
+  //   throw new AuthenticationError("You need to be logged in!");
+  // },
 };
 
 module.exports = resolvers;
-
-

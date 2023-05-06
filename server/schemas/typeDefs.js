@@ -34,7 +34,7 @@ const typeDefs = gql`
     chats(username: String!): [Chat]
     chat(chatId: ID!): Chat
     me: User
-    getMessages( _id:ID!, text: String! ): [Chat]
+    getAllMessages( _id:ID!, text: String! ): [Chat]
     getUserByUsername(username: String!): User
     getAllFriends(username: String!): User
   }
@@ -46,9 +46,12 @@ const typeDefs = gql`
     addMessage(_id: ID!, text: String!): Chat
     removeChat(_id: ID!): Chat
     removeMessage(_id: ID!): Chat
-    addFriend(username: String!): User
-    removeFriend(username: String!): User
+    
+    
   }
 `;
 
 module.exports = typeDefs;
+
+// addFriend(username: String!): User
+// removeFriend(username: String!): User

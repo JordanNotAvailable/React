@@ -2,6 +2,7 @@ import Register from './pages/Register/Register';
 import Home from './pages/Home/Home';
 import Signin from './pages/Signin/Signin';
 import Landing from './pages/Landing/Landing';
+import Header from './componets/Header/Header'
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { setContext } from '@apollo/client/link/context';
@@ -27,6 +28,7 @@ function App() {
     <ApolloProvider client={client} >
       <div className="App">
         <Router>
+          <Header />
           <Routes>
             <Route path= "/" element={<Landing/>}/>
             <Route path= "/register" element={<Register/>}/>
