@@ -4,21 +4,19 @@ import './ChatNav.css';
 export default function ChatNav() {
   return (
     <>
+      <div className="ChatNav">
       <div className="container">
         <div className="header">
           <div className="search-bar">
-            <input type="text" placeholder="Search group ID" />
+            <input type="text" placeholder="Search chat name" />
           </div>
           <div className="button-group">
-            <button>Create group</button>
             <button>Create chat</button>
             <button>Add friend</button>
           </div>
         </div>
-        <div className="chat-list">
-          <p>Chats linked to logged in user</p>
-        </div>
+      </div>
     </div>
-  </>
+    </>
   )
 }

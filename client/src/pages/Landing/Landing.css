@@ -13,60 +13,12 @@
   align-items: center;
 }
 
-.blob {
-  position: absolute;
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  mix-blend-mode: multiply;
-  filter: blur(24px);
-  opacity: 0.7;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-}
-
-.purple {
-  top: 0;
-  left: -4rem;
-  background-color: #a78bfa;
-  animation-name: blob-move;
-}
-
-.yellow {
-  top: 0;
-  right: -4rem;
-  background-color: #fca5a5;
-  animation-name: blob-move;
-  animation-delay: 2s;
-}
-
-.pink {
-  bottom: -8rem;
-  left: 20rem;
-  background-color: #feb2b2;
-  animation-name: blob-move;
-  animation-delay: 4s;
-}
-
 .content {
   position: absolute;
   top: 100px;
 }
 
-.animation-container {
-  display: flex;
-  flex-direction: row;
-  background-color: #fff;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-}
-
 .games-container {
-  flex-basis: 50%;
-  margin: 1rem;
-  padding: 1rem;
-}
-
-.animations-container {
   flex-basis: 50%;
   margin: 1rem;
   padding: 1rem;

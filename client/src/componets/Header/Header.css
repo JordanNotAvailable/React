@@ -1,22 +1,25 @@
 .header {
   background: rgb(195, 193, 193);
-  padding: 1rem 0;
-  height: 50px;
+  padding: 0;
+  height: 40px;
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .header-container {
   max-width: 70rem;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  padding: 0 1rem;
 }
 
 .header-left {
   display: flex;
   align-items: center;
-  flex-grow: 1;
+  
 }
 
 .header-left a {
@@ -33,7 +36,6 @@
 .header-right {
   display: flex;
   align-items: center;
-  margin-left: auto;
 }
 
 .dropdown {
@@ -85,4 +87,3 @@
 .dropdown-link:hover {
   background-color: #777ed8;
 }
-
